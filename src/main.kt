@@ -1,9 +1,8 @@
-import queue.LinkedListQueue
-import queue.RingBufferQueue
+import queue.StackQueue
 
 fun main() {
 
-    val queue = RingBufferQueue<String>(10).apply {
+    val queue = StackQueue<String>().apply {
         enqueue("Ray")
         enqueue("Brian")
         enqueue("Eric")
