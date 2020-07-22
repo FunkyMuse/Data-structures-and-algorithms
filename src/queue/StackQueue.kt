@@ -2,6 +2,14 @@ package queue
 
 import stack.Stack
 
+/**
+ * Same complexity as Ring buffer queue
+ * @param T
+ * @property leftStack Stack<T>
+ * @property rightStack Stack<T>
+ * @property count Int
+ * @property isEmpty Boolean
+ */
 class StackQueue<T> : Queue<T> {
     private val leftStack = Stack<T>()
     private val rightStack = Stack<T>()
