@@ -1,46 +1,53 @@
-import trees.avl.AVLTree
-import trees.leafNodes
-import trees.nodes
+import trie.*
 
 fun main() {
-    "repeated insertions in sequence" example {
-        val tree = AVLTree<Int>()
+    "insert and contains" example {
+        val trie = Trie<Char>()
+        trie.insert("cute")
+        if (trie.contains("cute")) {
+            println("cute is in the trie")
+        }
+    }
 
-        (0..14).forEach {
-            tree.insert(it)
+    "remove" example {
+        val trie = Trie<Char>()
+
+        trie.insert("cut")
+        trie.insert("cute")
+
+        println("\n*** Before removing ***")
+        assert(trie.contains("cut"))
+        println("\"cut\" is in the trie")
+        assert(trie.contains("cute"))
+        println("\"cute\" is in the trie")
+
+        println("\n*** After removing cut ***")
+        trie.remove("cut")
+        assert(!trie.contains("cut"))
+        assert(trie.contains("cute"))
+        println("\"cute\" is still in the trie")
+    }
+
+    "prefix matching" example {
+        val trie = Trie<Char>().apply {
+            insert("car")
+            insert("card")
+            insert("care")
+            insert("cared")
+            insert("cars")
+            insert("carbs")
+            insert("carapace")
+            insert("cargo")
         }
 
-        print(tree)
-    }
+        println("\nCollections starting with \"car\"")
+        val prefixedWithCar = trie.collections("car")
+        println(prefixedWithCar)
 
-    "removing a value" example {
-        val tree = AVLTree<Int>()
-        tree.insert(15)
-        tree.insert(10)
-        tree.insert(16)
-        tree.insert(18)
-        print(tree)
-        tree.remove(10)
-        print(tree)
+        println("\nCollections starting with \"care\"")
+        val prefixedWithCare = trie.collections("care")
+        println(prefixedWithCare)
     }
-
-    "leaf node count" example {
-        println(leafNodes(3))
-    }
-
-    "node count" example {
-        println(nodes(3))
-    }
-
-    "using TraversableBinaryNode" example {
-        val tree = AVLTree<Int>()
-        (0..14).forEach {
-            tree.insert(it)
-        }
-        println(tree)
-        tree.root?.traverseInOrder { println(it) }
-    }
-
 
 }
 
