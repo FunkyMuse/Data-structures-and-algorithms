@@ -1,24 +1,24 @@
-val exampleTree = BinarySearchTree<Int>().apply {
-    insert(3)
-    insert(1)
-    insert(4)
-    insert(0)
-    insert(2)
-    insert(5)
-}
-
-val exampleTree2 = BinarySearchTree<Int>().apply {
-    insert(2)
-    insert(5)
-    insert(3)
-    insert(1)
-    insert(0)
-// insert(100)
-}
+import trees.avl.AVLTree
 
 fun main() {
-    println(exampleTree.root?.isBinarySearchTree)
+    "repeated insertions in sequence" example {
+        val tree = AVLTree<Int>()
 
-    println(exampleTree == exampleTree2)
-    println(exampleTree.contains(exampleTree2))
+        (0..14).forEach {
+            tree.insert(it)
+        }
+
+        print(tree)
+    }
+
+    "removing a value" example {
+        val tree = AVLTree<Int>()
+        tree.insert(15)
+        tree.insert(10)
+        tree.insert(16)
+        tree.insert(18)
+        print(tree)
+        tree.remove(10)
+        print(tree)
+    }
 }

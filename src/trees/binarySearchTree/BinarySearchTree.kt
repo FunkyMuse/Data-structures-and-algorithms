@@ -1,3 +1,5 @@
+package trees.binarySearchTree
+
 class BinarySearchTree<T : Comparable<T>> {
 
     var root: BinarySearchNode<T>? = null

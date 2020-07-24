@@ -1,22 +1,28 @@
-
-package trees.binarySearchTree
-
+package trees.avl
 typealias Visitor<T> = (T) -> Unit
 
-class BinarySearchNode<T : Comparable<T>>(var value: T) {
+class AVLNode<T : Comparable<T>>(var value: T) {
 
-    var leftChild: BinarySearchNode<T>? = null
-    var rightChild: BinarySearchNode<T>? = null
+    var leftChild: AVLNode<T>? = null
+    var rightChild: AVLNode<T>? = null
 
-    val min: BinarySearchNode<T>?
+    val min: AVLNode<T>?
         get() = leftChild?.min ?: this
 
-    val isBinarySearchTree: Boolean
-        get() = isBST(this, min = null, max = null)
+    var height = 0
+
+    val leftHeight: Int
+        get() = leftChild?.height ?: -1
+
+    val rightHeight: Int
+        get() = rightChild?.height ?: -1
+
+    val balanceFactor: Int
+        get() = leftHeight - rightHeight
 
     override fun toString() = diagram(this)
 
-    private fun diagram(node: BinarySearchNode<T>?,
+    private fun diagram(node: AVLNode<T>?,
                         top: String = "",
                         root: String = "",
                         bottom: String = ""): String {
@@ -46,27 +52,6 @@ class BinarySearchNode<T : Comparable<T>>(var value: T) {
         leftChild?.traversePostOrder(visit)
         rightChild?.traversePostOrder(visit)
         visit(value)
-    }
-
-    private fun isBST(tree: BinarySearchNode<T>?, min: T?, max: T?): Boolean {
-        tree ?: return true
-
-        if (min != null && tree.value <= min) {
-            return false
-        } else if (max != null && tree.value > max) {
-            return false
-        }
-        return isBST(tree.leftChild, min, tree.value) && isBST(tree.rightChild, tree.value, max)
-    }
-
-    override fun equals(other: Any?): Boolean {
-        return if (other != null && other is BinarySearchNode<*>) {
-            this.value == other.value &&
-                    this.leftChild == other.leftChild &&
-                    this.rightChild == other.rightChild
-        } else {
-            false
-        }
     }
 
 }
