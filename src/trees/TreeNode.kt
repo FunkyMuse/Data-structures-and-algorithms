@@ -3,8 +3,11 @@ package trees
 import queue.ArrayListQueue
 import queue.LinkedListQueue
 
+typealias Visitor<T> = (TreeNode<T>) -> Unit
+
 
 class TreeNode<T>(val value: T) {
+
 
     private val children: MutableList<TreeNode<T>> = mutableListOf()
 

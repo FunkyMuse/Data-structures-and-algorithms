@@ -1,43 +1,36 @@
 import trees.TreeNode
+import trees.binary.BinaryNode
 
 fun main() {
 
-    val tree = makeBeverageTree()
-    //tree.forEachLevelOrder { println(it.value) }
+    val zero = BinaryNode(0)
+    val one = BinaryNode(1)
+    val five = BinaryNode(5)
+    val seven = BinaryNode(7)
+    val eight = BinaryNode(8)
+    val nine = BinaryNode(9)
+    seven.leftChild = one
+    one.leftChild = zero
+    one.rightChild = five
+    seven.rightChild = nine
+    nine.leftChild = eight
+    val tree = seven
 
-    tree.printEachLevel()
-   // println()
-    ///println(tree.find("hit")?.value)
-   // println(tree.find("hot")?.value)
+    tree.traverseInOrder {
+        println(it)
+    }
+    println()
+    tree.traversePreOrder {
+        println(it)
+    }
+    println()
+    tree.traversePostOrder {
+        println(it)
+    }
+    println()
+
+    println(tree)
+    val array = tree.serialize()
+    println(tree.deserializeOptimized(array))
 }
 
-fun makeBeverageTree(): TreeNode<String> {
-    val tree = TreeNode("Beverages")
-    val hot = TreeNode("hot")
-    val cold = TreeNode("cold")
-    val tea = TreeNode("tea")
-    val coffee = TreeNode("coffee")
-    val chocolate = TreeNode("cocoa")
-    val blackTea = TreeNode("black")
-    val greenTea = TreeNode("green")
-    val chaiTea = TreeNode("chai")
-    val soda = TreeNode("soda")
-    val milk = TreeNode("milk")
-    val gingerAle = TreeNode("ginger ale")
-    val bitterLemon = TreeNode("bitter lemon")
-    tree.add(hot)
-    tree.add(cold)
-    hot.add(tea)
-    hot.add(coffee)
-    hot.add(chocolate)
-    cold.add(soda)
-    cold.add(milk)
-    tea.add(blackTea)
-    tea.add(greenTea)
-    tea.add(chaiTea)
-    soda.add(gingerAle)
-    soda.add(bitterLemon)
-
-    return tree
-
-}
