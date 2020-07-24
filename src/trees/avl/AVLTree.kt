@@ -51,12 +51,10 @@ class AVLTree<T : Comparable<T>> {
         var current = root
 
         while (current != null) {
-            // 3
             if (current.value == value) {
                 return true
             }
 
-            // 4
             current = if (value < current.value) {
                 current.leftChild
             } else {
