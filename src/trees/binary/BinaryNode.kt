@@ -1,5 +1,4 @@
 package trees.binary
-import java.util.Collections.max
 import kotlin.math.max
 
 typealias Visitor<T> = (T) -> Unit
@@ -26,12 +25,10 @@ class BinaryNode<T>(val value: T) {
         visit(value)
     }
 
-    // solution 1
     fun height(node: BinaryNode<T>? = this): Int {
         return node?.let { 1 + max(height(node.leftChild), height(node.rightChild)) } ?: -1
     }
 
-    //solution 2
     fun serialize(node: BinaryNode<T> = this): MutableList<T?> {
         val list = mutableListOf<T?>()
         node.traversePreOrderWithNull { list.add(it) }
