@@ -1,6 +1,18 @@
 package trie
 class Trie<Key> {
 
+    private val storedLists: MutableSet<List<Key>> = mutableSetOf()
+
+    val lists get() = storedLists.toList()
+
+    val count
+        get() = storedLists.count()
+
+    val isEmpty
+        get() = storedLists.isEmpty()
+
+    val isNotEmpty get() = !isEmpty
+
     private val root = TrieNode<Key>(key = null, parent = null)
 
     fun insert(list: List<Key>) {
@@ -14,6 +26,7 @@ class Trie<Key> {
         }
 
         current.isTerminating = true
+        storedLists.add(list)
     }
 
     fun contains(list: List<Key>): Boolean {
@@ -37,6 +50,7 @@ class Trie<Key> {
 
         if (!current.isTerminating) return
 
+        storedLists.remove(list)
         current.isTerminating = false
 
         while (current.parent != null && current.children.isEmpty() && !current.isTerminating) {
