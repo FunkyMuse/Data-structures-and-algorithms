@@ -59,7 +59,7 @@ fun <T : Comparable<T>> LinkedList<T>.mergeSorted(otherList: LinkedList<T>): Lin
     if (this.isEmpty()) return otherList
     if (otherList.isEmpty()) return this
     val result = LinkedList<T>()
-    // 1
+
     var left = nodeAt(0)
     var right = otherList.nodeAt(0)
 

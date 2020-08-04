@@ -35,19 +35,19 @@ class BinarySearchTree<T : Comparable<T>> {
 
         when {
             value == node.value -> {
-                // 1
+
                 if (node.leftChild == null && node.rightChild == null) {
                     return null
                 }
-                // 2
+
                 if (node.leftChild == null) {
                     return node.rightChild
                 }
-                // 3
+
                 if (node.rightChild == null) {
                     return node.leftChild
                 }
-                // 4
+
                 node.rightChild?.min?.value?.let {
                     node.value = it
                 }
@@ -63,17 +63,17 @@ class BinarySearchTree<T : Comparable<T>> {
     override fun toString() = root?.toString() ?: "empty tree"
 
     fun contains(value: T): Boolean {
-        // 1
+
         var current = root
 
-        // 2
+
         while (current != null) {
-            // 3
+
             if (current.value == value) {
                 return true
             }
 
-            // 4
+
             current = if (value < current.value) {
                 current.leftChild
             } else {

@@ -86,9 +86,9 @@ abstract class AbstractHeap<T> : Heap<T> {
             return i
         }
         val leftChildIndex = index(element, leftChildIndex(i))
-        if (leftChildIndex != null) return leftChildIndex // 4
+        if (leftChildIndex != null) return leftChildIndex
         val rightChildIndex = index(element, rightChildIndex(i))
-        if (rightChildIndex != null) return rightChildIndex // 5
+        if (rightChildIndex != null) return rightChildIndex
         return null
     }
 
@@ -102,15 +102,15 @@ abstract class AbstractHeap<T> : Heap<T> {
     }
 
     override fun getNthSmallestT(n: T): T? {
-        var current = 1 // 1
-        while (!isEmpty) { // 2
-            val element = remove() // 3
-            if (current == n) { // 4
+        var current = 1
+        while (!isEmpty) {
+            val element = remove()
+            if (current == n) {
                 return element
             }
-            current += 1 // 5
+            current += 1
         }
-        return null // 6
+        return null
     }
 
     override fun merge(heap: AbstractHeap<T>) {
