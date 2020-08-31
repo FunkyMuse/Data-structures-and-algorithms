@@ -1,3 +1,5 @@
+import graphs.EdgeType
+import graphs.adjacency.AdjacencyList
 import sortitng.bubble.bubbleSort
 import sortitng.heap.heapSort
 import sortitng.insertion.insertionSort
@@ -11,112 +13,36 @@ import sortitng.radix.radixSort
 import sortitng.selection.selectionSort
 
 fun main() {
-    "bubble sort" example {
-        val list = arrayListOf(9, 4, 10, 3)
-        println("Original: $list")
-        list.bubbleSort(true)
-        println("Bubble sorted: $list")
-    }
+    val graph = AdjacencyList<String>()
 
-    "selection sort" example {
-        val list = arrayListOf(9, 4, 10, 3)
-        println("Original: $list")
-        list.selectionSort(true)
-        println("Selection sorted: $list")
-    }
+    val singapore = graph.createVertex("Singapore")
+    val tokyo = graph.createVertex("Tokyo")
+    val hongKong = graph.createVertex("Hong Kong")
+    val detroit = graph.createVertex("Detroit")
+    val sanFrancisco = graph.createVertex("San Francisco")
+    val washingtonDC = graph.createVertex("Washington, DC")
+    val austinTexas = graph.createVertex("Austin, Texas")
+    val seattle = graph.createVertex("Seattle")
 
-    "insertion sort" example {
-        val list = arrayListOf(9, 4, 10, 3)
-        println("Original: $list")
-        list.insertionSort(true)
-        println("Insertion sorted: $list")
-    }
+    graph.add(EdgeType.UNDIRECTED, singapore, hongKong, 300.0)
+    graph.add(EdgeType.UNDIRECTED, singapore, tokyo, 500.0)
+    graph.add(EdgeType.UNDIRECTED, hongKong, tokyo, 250.0)
+    graph.add(EdgeType.UNDIRECTED, tokyo, detroit, 450.0)
+    graph.add(EdgeType.UNDIRECTED, tokyo, washingtonDC, 300.0)
+    graph.add(EdgeType.UNDIRECTED, hongKong, sanFrancisco, 600.0)
+    graph.add(EdgeType.UNDIRECTED, detroit, austinTexas, 50.0)
+    graph.add(EdgeType.UNDIRECTED, austinTexas, washingtonDC, 292.0)
+    graph.add(EdgeType.UNDIRECTED, sanFrancisco, washingtonDC, 337.0)
+    graph.add(EdgeType.UNDIRECTED, washingtonDC, seattle, 277.0)
+    graph.add(EdgeType.UNDIRECTED, sanFrancisco, seattle, 218.0)
+    graph.add(EdgeType.UNDIRECTED, austinTexas, sanFrancisco, 297.0)
 
-    "merge sort" example {
-        val list = listOf(7, 2, 6, 3, 9)
-        println("Original: $list")
+    println(graph)
 
-        val result = list.mergeSort()
-        println("Merge sorted: $result")
-    }
-
-    "merge iterables" example {
-        val list1 = listOf(1, 2, 3, 4, 5, 6, 7, 8)
-        val list2 = listOf(1, 3, 4, 5, 5, 6, 7, 7)
-
-        val result = merge(list1, list2)
-        println("Merge sorted: $result")
-    }
-
-    "radix sort" example {
-        val list = arrayListOf(88, 410, 1772, 20)
-        println("Original: $list")
-        list.radixSort()
-        println("Radix sorted: $list")
-    }
-
-    "digits" example {
-        val kb = 1024
-        println("$kb has ${1024.digits()} digits")
-        println("and the 3rd digit is ${1024.digit(3)}")
-    }
-
-    "MSD radix sort" example {
-        val list= (0..10).map { (Math.random() * 10000).toInt() }.toMutableList()
-        println("Original: $list")
-        list.lexicographicalSort()
-        println("Radix sorted: $list")
-    }
-
-    "Heap sort" example {
-        val array = arrayOf(6, 12, 2, 26, 8, 18, 21, 9, 5)
-        array.heapSort(ascending)
-        print(array.joinToString())
-    }
-
-    "Heap sort descending" example {
-        val array = arrayOf(6, 12, 2, 26, 8, 18, 21, 9, 5)
-        array.heapSort(descending)
-        print(array.joinToString())
-    }
-
-    "Naive quicksort" example  {
-        val list = arrayListOf(12, 0, 3, 9, 2, 18, 8, 27, 1, 5, 8, -1, 21)
-        println("Original: $list")
-        val sorted = list.quicksortNaive()
-        println("Sorted: $sorted")
-    }
-    "Lomuto quicksort" example  {
-        val list = arrayListOf(12, 0, 3, 9, 2, 21, 18, 27, 1, 5, 8, -1, 8)
-        println("Original: $list")
-        list.quicksortLomuto(0, list.size - 1)
-        println("Sorted: $list")
-    }
-    "Hoare quicksort" example {
-        val list = arrayListOf(12, 0, 3, 9, 2, 21, 18, 27, 1, 5, 8, -1, 8)
-        println("Original: $list")
-        list.quicksortHoare( 0, list.size - 1)
-        println("Sorted: $list")
-    }
-    "Median of three quicksort" example {
-        val list = arrayListOf(12, 0, 3, 9, 2, 21, 18, 27, 1, 5, 8, -1, 8)
-        println("Original: $list")
-        list.quickSortMedian( 0, list.size - 1)
-        println("Sorted: $list")
-    }
-    "Dutch flag quicksort" example {
-        val list = arrayListOf(12, 0, 3, 9, 2, 21, 18, 27, 1, 5, 8, -1, 8)
-        println("Original: $list")
-        list.quicksortDutchFlag( 0, list.size - 1)
-        println("Sorted: $list")
-    }
-
-    "Iterative lomuto quicksort" example {
-        val list = arrayListOf(12, 0, 3, 9, 2, 21, 18, 27, 1, 5, 8,
-                -1, 8)
-        println("Original: $list")
-        list.quicksortIterativeLomuto( 0, list.size - 1)
-        println("Sorted: $list")
+    println("San Francisco Outgoing Flights:")
+    println("--------------------------------")
+    graph.edges(sanFrancisco).forEach { edge ->
+        println("from: ${edge.source.data} to: ${edge.destination.data}")
     }
 }
 
