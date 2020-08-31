@@ -10,6 +10,7 @@ import graphs.Vertex
  */
 class AdjacencyMatrix<T> : Graph<T> {
 
+    override val allVertices: ArrayList<Vertex<T>> get() = vertices
     private val vertices = arrayListOf<Vertex<T>>()
     private val weights = arrayListOf<ArrayList<Double?>>()
 

@@ -11,6 +11,8 @@ import graphs.Vertex
 class AdjacencyList<T> : Graph<T> {
     private val adjacencies: HashMap<Vertex<T>, ArrayList<Edge<T>>> = HashMap()
 
+    override val allVertices: ArrayList<Vertex<T>> get() = ArrayList(adjacencies.keys)
+
     override fun createVertex(data: T): Vertex<T> {
         val vertex = Vertex(adjacencies.count(), data)
         adjacencies[vertex] = ArrayList()

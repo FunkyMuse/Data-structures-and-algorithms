@@ -14,36 +14,29 @@ import sortitng.radix.radixSort
 import sortitng.selection.selectionSort
 
 fun main() {
-    val graph = AdjacencyMatrix<String>()
+    val graph = AdjacencyList<String>()
+    val a = graph.createVertex("A")
+    val b = graph.createVertex("B")
+    val c = graph.createVertex("C")
+    val d = graph.createVertex("D")
+    val e = graph.createVertex("E")
+    val f = graph.createVertex("F")
+    val g = graph.createVertex("G")
+    val h = graph.createVertex("H")
 
-    val singapore = graph.createVertex("Singapore")
-    val tokyo = graph.createVertex("Tokyo")
-    val hongKong = graph.createVertex("Hong Kong")
-    val detroit = graph.createVertex("Detroit")
-    val sanFrancisco = graph.createVertex("San Francisco")
-    val washingtonDC = graph.createVertex("Washington, DC")
-    val austinTexas = graph.createVertex("Austin, Texas")
-    val seattle = graph.createVertex("Seattle")
+    graph.add(EdgeType.UNDIRECTED, a, b, null)
+    graph.add(EdgeType.UNDIRECTED, a, c, null)
+    graph.add(EdgeType.UNDIRECTED, a, d, null)
+    graph.add(EdgeType.UNDIRECTED, b, e, null)
+    graph.add(EdgeType.UNDIRECTED, c, f, null)
+    graph.add(EdgeType.UNDIRECTED, c, g, null)
+    graph.add(EdgeType.UNDIRECTED, e, h, null)
+    graph.add(EdgeType.UNDIRECTED, e, f, null)
+    graph.add(EdgeType.UNDIRECTED, f, g, null)
 
-    graph.add(EdgeType.UNDIRECTED, singapore, hongKong, 300.0)
-    graph.add(EdgeType.UNDIRECTED, singapore, tokyo, 500.0)
-    graph.add(EdgeType.UNDIRECTED, hongKong, tokyo, 250.0)
-    graph.add(EdgeType.UNDIRECTED, tokyo, detroit, 450.0)
-    graph.add(EdgeType.UNDIRECTED, tokyo, washingtonDC, 300.0)
-    graph.add(EdgeType.UNDIRECTED, hongKong, sanFrancisco, 600.0)
-    graph.add(EdgeType.UNDIRECTED, detroit, austinTexas, 50.0)
-    graph.add(EdgeType.UNDIRECTED, austinTexas, washingtonDC, 292.0)
-    graph.add(EdgeType.UNDIRECTED, sanFrancisco, washingtonDC, 337.0)
-    graph.add(EdgeType.UNDIRECTED, washingtonDC, seattle, 277.0)
-    graph.add(EdgeType.UNDIRECTED, sanFrancisco, seattle, 218.0)
-    graph.add(EdgeType.UNDIRECTED, austinTexas, sanFrancisco, 297.0)
-
-    println(graph)
-
-    println("San Francisco Outgoing Flights:")
-    println("--------------------------------")
-    graph.edges(sanFrancisco).forEach { edge ->
-        println("from: ${edge.source.data} to: ${edge.destination.data}")
+    val vertices = graph.breadthFirstSearch(a)
+    vertices.forEach {
+        println(it.data)
     }
 }
 
