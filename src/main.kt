@@ -1,5 +1,6 @@
 import graphs.EdgeType
 import graphs.adjacency.AdjacencyList
+import graphs.adjacency.AdjacencyMatrix
 import sortitng.bubble.bubbleSort
 import sortitng.heap.heapSort
 import sortitng.insertion.insertionSort
@@ -13,7 +14,7 @@ import sortitng.radix.radixSort
 import sortitng.selection.selectionSort
 
 fun main() {
-    val graph = AdjacencyList<String>()
+    val graph = AdjacencyMatrix<String>()
 
     val singapore = graph.createVertex("Singapore")
     val tokyo = graph.createVertex("Tokyo")
