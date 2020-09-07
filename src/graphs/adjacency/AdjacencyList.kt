@@ -36,6 +36,12 @@ class AdjacencyList<T> : Graph<T> {
         }
     }
 
+    fun copyVertices(graph: AdjacencyList<T>) {
+        graph.allVertices.forEach {
+            adjacencies[it] = arrayListOf()
+        }
+    }
+
     override fun edges(source: Vertex<T>) = adjacencies[source] ?: arrayListOf()
 
     override fun weight(source: Vertex<T>, destination: Vertex<T>) = edges(source).firstOrNull { it.destination == destination }?.weight
